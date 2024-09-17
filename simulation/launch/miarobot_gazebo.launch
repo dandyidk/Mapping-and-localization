@@ -1,0 +1,10 @@
+<launch>
+  <arg name="world_file" default="$(find miarobot_description)/worlds/mia-competition.world"/>
+  <param name="robot_description" command="$(find xacro)/xacro $(find miarobot_description)/urdf/model.urdf.xacro"/>
+
+  <!-- Start Gazebo -->
+  <node name="gazebo" pkg="gazebo_ros" type="gazebo" args="$(arg world_file)" respawn="false" output="screen"/>
+
+  <!-- Spawn the robot model in Gazebo -->
+  <node name="spawn_miarobot" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model miarobot" output="screen"/>
+</launch>
